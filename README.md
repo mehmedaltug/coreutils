@@ -1,26 +1,60 @@
-# Core Utils
+# CoreUtils in C
 
-This is my implementation of my most used coreutils.    
+A lightweight, ground-up reimplementation of classic Unix core utilities written in standard C. Built as a hands-on project to explore system-level POSIX tools, low-level string handling, and manual memory management.
 
-## Why?
+---
 
-I wanted to test myself and see if I could write the very tools I hold dear to my Unix OS.
+## Technical Highlights
 
-## Which tools are currently Implemented?
+* **Custom String Struct:** Replaced raw `char*` arrays with a custom `String` struct featuring dynamic memory resizing, bounds checking, and custom string manipulation helpers.
+* **Python Test Suite:** Uses Python integration tests to assert stdout, stderr, and exit codes directly against the system's native Unix utilities.
 
-`
-ls    
-cat    
-cut    
-pwd    
-clear
-`
+---
 
-## Which tools are GONNA be implemented?
+## Utility Status
 
-`
-head    
-tail    
-grep
-...
-`
+| Utility | Status | Description |
+| --- | --- | --- |
+| `ls` | **Implemented** | List directory contents |
+| `cat` | **Implemented** | Concatenate and display file contents |
+| `cut` | **Implemented** | Extract sections from lines of standard input/files |
+| `pwd` | **Implemented** | Print current working directory |
+| `clear` | **Implemented** | Clear the terminal screen |
+| `head` | **Planned** | Output the first portion of files |
+| `tail` | **Planned** | Output the last portion of files |
+| `grep` | **Planned** | Search for patterns within text |
+
+---
+
+## Architecture Overview
+
+* **`src/`** — Entry points and logic for individual core utility binaries.
+* **`lib/`** — Shared headers, core helper functions, and the custom `String` struct implementation.
+* **`tests/`** — Python-driven test suite comparing compiled binary outputs against native POSIX tools.
+
+---
+
+## Building & Testing
+
+**Prerequisites**
+
+* `gcc` or `clang`
+* `bash`
+* `python3`
+
+**Commands**
+
+```bash
+# Build all utilities
+./build.sh
+
+# Build specific utilities
+./build.sh TOOL_NAME
+
+# Build C test programs
+./build.sh test TEST_NAME
+
+# Run the Python tests
+python3 ./test/TOOL_TEST.py
+
+```
