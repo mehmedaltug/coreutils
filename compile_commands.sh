@@ -1,8 +1,6 @@
 #!/bin/bash
 # generate_compile_commands.sh
 
-rm compile_commands.json
-
 echo "[" > compile_commands.json
 first=true
 

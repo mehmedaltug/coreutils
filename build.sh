@@ -1,4 +1,4 @@
-CC=clang
+CC=gcc
 CFLAGS="-Wall -Wextra -O0 -g -Ilib"
 POSTFIX=""
 if [[ `uname` == "Windows_NT" ]]; then
