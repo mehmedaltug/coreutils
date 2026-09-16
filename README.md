@@ -22,7 +22,7 @@ A lightweight, ground-up reimplementation of classic Unix core utilities written
 | `clear` | **Implemented** | Clear the terminal screen |
 | `head` | **Planned** | Output the first portion of files |
 | `tail` | **Planned** | Output the last portion of files |
-| `grep` | **Planned** | Search for patterns within text |
+| `grep` | **Implemented** | Search for patterns within text |
 
 ---
 
