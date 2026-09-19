@@ -51,7 +51,7 @@ make
 # Build specific utilities
 make TOOL_NAME
 
-# Run test
+# Run tests
 make test
 
 ```
