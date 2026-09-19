@@ -16,17 +16,17 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  const String ARGUMENT_START = StringCreate("-");
-  const String DELIMITER = StringCreate("-d");
-  const String FIELD = StringCreate("-f");
+  const String ARGUMENT_START = StringCreate("-", 0);
+  const String DELIMITER = StringCreate("-d", 0);
+  const String FIELD = StringCreate("-f", 0);
 
   String args[2];
   String delim;
   String field;
-  String text = StringCreate("");
+  String text = StringCreate("", 0);
   int current_index = 0;
   for (int i = 1; i < argc; i++) {
-    String tmp = StringCreate(argv[i]);
+    String tmp = StringCreate(argv[i], 0);
     if (StringFind(tmp, ARGUMENT_START) != -1 && current_index != 2)
       args[current_index++] = tmp;
     else if (argc == 4) {
@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 
     while ((bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1)) > 0) {
       buffer[bytes_read] = '\0';
-      String tmp = StringCreate(buffer);
+      String tmp = StringCreate(buffer, 0);
       StringConcat(&text, tmp);
     }
     if (bytes_read == -1)

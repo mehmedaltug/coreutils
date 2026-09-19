@@ -16,9 +16,9 @@ int main(int argc, char **argv) {
     regcomp(&regex, filter, REG_EXTENDED);
     String text;
     if (argc == 3)
-        text = StringCreate(argv[2]);
+        text = StringCreate(argv[2], 0);
     else
-        text = StringCreate("");
+        text = StringCreate("", 0);
 
     if (argc == 2) {
       char buffer[BUFFER_SIZE];
@@ -26,14 +26,14 @@ int main(int argc, char **argv) {
 
       while ((bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE - 1)) > 0) {
         buffer[bytes_read] = '\0';
-        String tmp = StringCreate(buffer);
+        String tmp = StringCreate(buffer, 0);
         StringConcat(&text, tmp);
       }
       if (bytes_read == -1)
         perror("Reading STDIN failed!");
     }
     int line_count = 0;
-    String *lines = StringSplit(text, StringCreate("\n"), &line_count);
+    String *lines = StringSplit(text, StringCreate("\n", 0), &line_count);
     if (line_count != 0)
         for (int i = 0; i < line_count; i++) {
             if (regexec(&regex, StringGetPrintable(lines[i]), 1, &m, 0) == 0)

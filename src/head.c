@@ -28,9 +28,9 @@ int main(int argc, char **argv) {
 
     if (argc == 3) {
         if (arg_location == 1)
-            content = StringCreate(argv[3]);
+            content = StringCreate(argv[3], 0);
         else
-            content = StringCreate(argv[1]);
+            content = StringCreate(argv[1], 0);
     } else {
         
     }
