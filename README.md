@@ -7,7 +7,7 @@ A lightweight, ground-up reimplementation of classic Unix core utilities written
 ## Technical Highlights
 
 * **Custom String Struct:** Replaced raw `char*` arrays with a custom `String` struct featuring dynamic memory resizing, bounds checking, and custom string manipulation helpers.
-* **Python Test Suite:** Uses Python integration tests to assert stdout, stderr, and exit codes directly against the system's native Unix utilities.
+* **Hybrid Test Suite:** Uses Python integration tests and C function tests to assert stdout, stderr, and exit codes directly against the system's native Unix utilities.
 
 ---
 
@@ -30,7 +30,7 @@ A lightweight, ground-up reimplementation of classic Unix core utilities written
 
 * **`src/`** — Entry points and logic for individual core utility binaries.
 * **`lib/`** — Shared headers, core helper functions, and the custom `String` struct implementation.
-* **`tests/`** — Python-driven test suite comparing compiled binary outputs against native POSIX tools.
+* **`tests/`** — Python and C test suite comparing compiled binary outputs against native POSIX tools.
 
 ---
 
