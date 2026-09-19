@@ -3,9 +3,28 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <ctype.h>
+
+void lower_case(char *str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        str[i] = tolower((unsigned char)str[i]);
+    }
+}
 
 int compare_strings(const void *a, const void *b) {
-    return strcmp(*(const char **)a, *(const char **)b);
+    char *str1 = (char*)malloc(strlen(*(char **)a));
+    char *str2 = (char*)malloc(strlen(*(char **)b));
+    strcpy(str1, *(char **)a);
+    strcpy(str2, *(char **)b);
+
+    lower_case(str1);
+    lower_case(str2);
+    int result = strcmp(str1, str2);
+
+    free(str1); str1 = NULL;
+    free(str2); str2 = NULL;
+
+    return result;
 }
 
 int main(int argc, char **argv) {
