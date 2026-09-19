@@ -15,6 +15,7 @@ A lightweight, ground-up reimplementation of classic Unix core utilities written
 
 | Utility | Status | Description |
 | --- | --- | --- |
+| `echo` | **Implemented** | Print user input to the console |
 | `ls` | **Implemented** | List directory contents |
 | `cat` | **Implemented** | Concatenate and display file contents |
 | `cut` | **Implemented** | Extract sections from lines of standard input/files |
