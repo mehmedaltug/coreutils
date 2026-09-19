@@ -46,15 +46,12 @@ A lightweight, ground-up reimplementation of classic Unix core utilities written
 
 ```bash
 # Build all utilities
-./build.sh
+make
 
 # Build specific utilities
-./build.sh TOOL_NAME
+make TOOL_NAME
 
-# Build C test programs
-./build.sh test TEST_NAME
-
-# Run the Python tests
-python3 ./test/TOOL_TEST.py
+# Run test
+make test
 
 ```
