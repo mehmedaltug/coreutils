@@ -9,12 +9,10 @@ int compare_strings(const void *a, const void *b) {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 2) {
-        fprintf(stderr, "Directory not specified!\n");
-        return 1;
-    }
+    const char *dir_path = ".";
+    if (argc >= 2) 
+        dir_path = argv[1];
 
-    const char *dir_path = argv[1];
     DIR *dir = opendir(dir_path);
     if (dir == NULL) {
         perror("Unable to open directory");
