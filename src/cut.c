@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
   const String ARGUMENT_START = StringCreate("-", 0);
   const String DELIMITER = StringCreate("-d", 0);
   const String FIELD = StringCreate("-f", 0);
+  const String NL = StringCreate("\n", 0);
 
   String args[2];
   String delim;
@@ -49,9 +50,21 @@ int main(int argc, char **argv) {
     if (bytes_read == -1)
       perror("Reading STDIN failed!");
   }
+  if (argc == 4) {
+    FILE *file = fopen(text.start, "r");
+    if (file == NULL) {
+      printf("Could not open file.\n");
+      return 1;
+    }
+    char buffer[256];
+    text = StringCreate("", 0);
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+      StringConcatChar(&text, buffer);
+    }
+  }
 
   if (current_index != 2)
-      return_error("Invalid arguments!\n");
+    return_error("Invalid arguments!\n");
   if (StringFind(args[0], DELIMITER) != -1 &&
       StringFind(args[1], FIELD) != -1) {
     delim = args[0];
@@ -76,10 +89,26 @@ int main(int argc, char **argv) {
   field = split[1];
   int index = strtol(StringGetPrintable(field), NULL, 10);
 
-  int split_count = -1;
-  split = StringSplit(text, delim, &split_count);
-  if (index <= 0 || index > split_count)
-    return return_error("Invalid field number!\n");
-  printf("%s\n", StringGetPrintable(split[index - 1]));
-  free(split);
+  int line_count = -1;
+  String *lines = StringSplit(text, NL, &line_count);
+
+  if (line_count == 0 || line_count == 1){
+    int split_count = -1;
+    split = StringSplit(text, delim, &split_count);
+    if (index <= 0 || index > split_count)
+      return return_error("Invalid field number!\n");
+    printf("%s\n", StringGetPrintable(split[index - 1]));
+    free(split);
+    return 0;
+  }
+
+  for (int i = 0; i < line_count; i++){
+    int split_count = -1;
+    split = StringSplit(lines[i], delim, &split_count);
+    if (index <= 0 || index > split_count)
+      return return_error("Invalid field number!\n");
+    printf("%s\n", StringGetPrintable(split[index - 1]));
+    free(split);
+  }
+  return 0;
 }
