@@ -17,6 +17,7 @@ char *StringGetPrintable(String);
 String *StringSplit(String, String, int *);
 int StringCompare(String, String);
 void StringConcat(String *, String);
+void StringConcatChar(String *, char *);
 void StringFree(String *);
 
 String StringCreate(char *str, int is_malloc) {
@@ -60,15 +61,16 @@ char *StringGetPrintable(String str) {
 }
 
 String *StringSplit(String str, String delimiter, int *item_count) {
-  String base_str;
-  StringCopy(str, &base_str);
-  if (base_str.length == 0 || delimiter.length == 0) {
+  if (str.length == 0 || delimiter.length == 0) {
     if (item_count)
       *item_count = 0;
     return NULL;
   }
   int count = 1;
+  String base_str;
+  StringCopy(str, &base_str);
   String cut_str = base_str;
+
   int pos;
   while ((pos = StringFind(cut_str, delimiter)) != -1) {
     count++;
@@ -77,12 +79,19 @@ String *StringSplit(String str, String delimiter, int *item_count) {
   }
 
   String *split_arr = malloc(sizeof(String) * count);
-  if (!split_arr)
+  if (!split_arr) {
+    if (item_count)
+      *item_count = 0;
     return NULL;
+  }
   if (count == 1) {
+    if (item_count)
+      *item_count = 1;
     *split_arr = str;
+    StringFree(&base_str);
     return split_arr;
   }
+
   cut_str = base_str;
   for (int i = 0; i < count - 1; i++) {
     pos = StringFind(cut_str, delimiter);
@@ -90,7 +99,7 @@ String *StringSplit(String str, String delimiter, int *item_count) {
     cut_str.start += pos + delimiter.length;
     cut_str.length -= pos + delimiter.length;
   }
-  split_arr[count - 1] = cut_str;
+  split_arr[count - 1] = (String){cut_str.start, cut_str.length, 0};
   if (item_count)
     *item_count = count;
   return split_arr;
@@ -111,10 +120,23 @@ void StringConcat(String *str1, String str2) {
   memcpy(cat, str1->start, str1->length);
   memcpy(cat + str1->length, str2.start, str2.length);
   if (str1->is_malloc)
-    free(str1->start);
+    StringFree(str1);
 
   str1->start = cat;
   str1->length += str2.length;
+  str1->is_malloc = 1;
+}
+
+void StringConcatChar(String *str1, char *str2) {
+  char *cat = malloc(str1->length + strlen(str2));
+  memcpy(cat, str1->start, str1->length);
+  memcpy(cat + str1->length, str2, strlen(str2));
+  int temp_len = str1->length;
+  if (str1->is_malloc)
+    StringFree(str1);
+
+  str1->start = cat;
+  str1->length = temp_len + strlen(str2);
   str1->is_malloc = 1;
 }
 
