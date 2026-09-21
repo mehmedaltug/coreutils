@@ -1,4 +1,4 @@
-# CoreUtils in C
+# CoreUtils
 
 A lightweight, ground-up reimplementation of classic Unix core utilities written in standard C. Built as a hands-on project to explore system-level POSIX tools, low-level string handling, and manual memory management.
 
