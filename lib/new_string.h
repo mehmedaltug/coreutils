@@ -119,11 +119,12 @@ void StringConcat(String *str1, String str2) {
   char *cat = malloc(str1->length + str2.length);
   memcpy(cat, str1->start, str1->length);
   memcpy(cat + str1->length, str2.start, str2.length);
+  int temp_len = str1->length;
   if (str1->is_malloc)
     StringFree(str1);
 
   str1->start = cat;
-  str1->length += str2.length;
+  str1->length = temp_len + str2.length;
   str1->is_malloc = 1;
 }
 
