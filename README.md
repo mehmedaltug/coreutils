@@ -21,8 +21,8 @@ A lightweight, ground-up reimplementation of classic Unix core utilities written
 | `cut` | **Implemented** | Extract sections from lines of standard input/files |
 | `pwd` | **Implemented** | Print current working directory |
 | `clear` | **Implemented** | Clear the terminal screen |
-| `head` | **Planned** | Output the first portion of files |
-| `tail` | **Planned** | Output the last portion of files |
+| `head` | **Implemented** | Output the first portion of files |
+| `tail` | **Implemented** | Output the last portion of files |
 | `grep` | **Implemented** | Search for patterns within text |
 
 ---
