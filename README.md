@@ -8,6 +8,7 @@ A lightweight, ground-up reimplementation of classic Unix core utilities written
 
 * **Custom String Struct:** Replaced raw `char*` arrays with a custom `String` struct featuring dynamic memory resizing, bounds checking, and custom string manipulation helpers.
 * **Hybrid Test Suite:** Uses Python integration tests and C function tests to assert stdout, stderr, and exit codes directly against the system's native Unix utilities.
+* **Cross Platform:** Uses universal functions and standard libraries to create a suitable set for Windows and Linux (possibly MacOS too, testing required).
 
 ---
 
